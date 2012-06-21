@@ -8,8 +8,6 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 import time
-#win = win32console.GetConsoleWindow()
-#win32gui.ShowWindow(win,0)
 
 hours = 3600
 
@@ -35,10 +33,10 @@ def EmailSender():
 	msg.attach(MIMEText(html,'html'))
 
 	# sender and receiver address
-	address = 'sombracaneca@gmail.com'
-	password = 'inhame666'
+	address = #'youraddress@yourservice.com'
+	password = #'password'
 	
-	server = smtplib.SMTP('smtp.gmail.com:587')
+	server = smtplib.SMTP(#'Your_SMTP_Server:PORT')
 	server.starttls()
 	server.set_debuglevel(1)
 	server.login(address,password)
